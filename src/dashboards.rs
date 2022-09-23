@@ -28,10 +28,10 @@ pub struct Dashboard {
 }
 
 impl Dashboard {
-    pub fn new(file: &str) -> Self {
-        let file = std::fs::read_to_string(file).unwrap();
-        let dashboard: Dashboard = serde_yaml::from_str(&file).unwrap();
-        dashboard
+    pub fn new(file: &str) -> Result<Self, Box<dyn std::error::Error>> {
+        let file = std::fs::read_to_string(file)?;
+        let dashboard: Dashboard = serde_yaml::from_str(&file)?;
+        Ok(dashboard)
     }
 }
 
